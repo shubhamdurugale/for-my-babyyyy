@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valentine Wish 💖</title>
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Love+Ya+Like+A+Sister&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+
+    <style>
+      body {
+        font-family: 'Montserrat', sans-serif;
+      }
+
+      h1 {
+        font-family: "Pacifico", cursive;
+      }
+
+      .finalQuote {
+        font-family: "Dancing Script", cursive;
+      }
+
+      #typingText {
+        font-family: "Great Vibes", cursive;
+      }
+      #wishMessage {
+        font-family: "Pacifico", cursive;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: radial-gradient(circle at top, #ffb6c1, #ff4d6d, #b3003c);
+        font-family: "Love Ya Like A Sister", cursive;
+      }
+
+      h1 {
+        font-size: 3.2rem;
+        color: white;
+        text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.4);
+      }
+
+      /* 💗 Floating Hearts */
+      .heart {
+        position: absolute;
+        opacity: 0.9;
+        filter: drop-shadow(0 0 8px rgba(255, 200, 220, 0.8));
+        animation: heartFloat 6s linear infinite;
+        z-index: 0;
+      }
+
+      @keyframes heartFloat {
+        from {
+          transform: translateY(110vh) scale(0.9);
+          opacity: 1;
+        }
+        to {
+          transform: translateY(-20vh) scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      .container {
+        text-align: center;
+        z-index: 2;
+      }
+
+      /* Buttons */
+      .buttons {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        gap: 70px;
+      }
+
+      button {
+        font-size: 1.7rem;
+        padding: 15px 45px;
+        border: none;
+        border-radius: 18px;
+        cursor: pointer;
+        transition: 0.3s ease;
+        font-family: "Pacifico", cursive;
+      }
+
+      #yesBtn {
+        background: linear-gradient(to right, #ff0033, #ff4d6d);
+        color: white;
+        box-shadow: 0 0 25px rgba(255, 0, 80, 0.6);
+        border: 3px pink solid;
+        font-family: 'Montserrat', sans-serif;
+      }
+
+      #yesBtn:hover {
+        transform: scale(1.12);
+      }
+
+      #noBtn {
+        background: white;
+        color: #ff0033;
+        border: 3px red solid;
+        font-family: 'Montserrat', sans-serif;
+      }
+
+      /* Wish Message */
+      #wishMessage {
+        display: none;
+        text-align: center;
+        color: white;
+        font-size: 2.4rem;
+        padding: 20px;
+        font-family: 'Playfair Display', serif;
+      }
+
+      /* Balloon Screen */
+      #balloonScreen {
+        display: none;
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, #ffafcc, #ff5d8f, #c9184a);
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 3;
+        overflow: hidden;
+      }
+
+      /* 🎈 Balloons */
+      .balloon {
+        width: 85px;
+        height: 110px;
+        border-radius: 50%;
+        position: absolute;
+        cursor: pointer;
+
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25),
+          0 0 25px rgba(255, 150, 200, 0.6);
+
+        transition: transform 0.35s ease;
+      }
+
+      .balloon:hover {
+        transform: scale(1.2) rotate(4deg);
+      }
+
+      .balloon::after {
+        content: "";
+        width: 2px;
+        height: 55px;
+        background: rgba(255, 255, 255, 0.85);
+        position: absolute;
+        top: 110px;
+        left: 50%;
+      }
+
+      /* 🎊 Confetti */
+      .confetti {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        opacity: 0.9;
+        animation: confettiFall 1.2s ease-out forwards;
+      }
+
+      @keyframes confettiFall {
+        from {
+          transform: translateY(0px) rotate(0deg);
+          opacity: 1;
+        }
+        to {
+          transform: translateY(120px) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      /* 📸 Polaroid Smooth Popup */
+      #polaroid {
+        display: none;
+        background: white;
+        padding: 18px;
+        border-radius: 18px;
+        width: 270px;
+        margin-top: 25px;
+        text-align: center;
+        z-index: 5;
+
+        opacity: 0;
+        transform: scale(0.7);
+        transition: all 0.6s ease;
+      }
+
+      #polaroid.show {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      #polaroid img {
+        width: 100%;
+        border-radius: 12px;
+      }
+
+      #polaroid p {
+        font-size: 1.4rem;
+        margin-top: 12px;
+        color: #ff3366;
+        font-family: "Pacifico", cursive;
+      }
+      .finalQuote {
+        font-size: 1.8rem;
+        margin-top: 25px;
+        max-width: 1200px;
+        line-height: 1.6;
+        color: white;
+        text-shadow: 0 0 15px rgba(255, 200, 220, 0.6);
+      }
+
+      /* 💍 Forever Screen */
+      #foreverScreen {
+        display: none;
+        position: absolute;
+        inset: 0;
+        /* background: linear-gradient(to bottom, #ffafcc, #ff5d8f, #c9184a); */
+        color: white;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        z-index: 10;
+        overflow: hidden;
+        animation: finalFade 2s ease forwards;
+      }
+
+      @keyframes finalFade {
+        from {
+          opacity: 0;
+          transform: scale(0.7);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* 💌 Typing */
+      #typingText {
+        margin-top: 35px;
+        font-size: 2.5rem;
+        font-family: "Pacifico", cursive;
+        color: #fff;
+        border-right: 3px solid white;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Proposal -->
+    <div class="container" id="proposalBox">
+      <h1>Will you be my Valentine babyyy? 💕</h1>
+
+      <div class="buttons">
+        <button id="yesBtn">Yes 🙈</button>
+        <button id="noBtn">No 🥺</button>
+      </div>
+
+      <!-- 😿 Funny No Reaction Box -->
+      <div id="noReaction" style="display: none; margin-top: 30px">
+        <img
+          id="catImg"
+          src="https://i.imgur.com/8Km9tLL.png"
+          width="180"
+          style="border-radius: 20px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.3)"
+        />
+
+        <h2
+          id="catText"
+          style="color: white; font-size: 2rem; margin-top: 15px"
+        >
+          Whyyyy babyyyy 😿
+        </h2>
+
+        <button
+          id="thinkBtn"
+          style="
+          visibility: hidden;
+            margin-top: 15px;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.4rem;
+            font-family: 'Pacifico', cursive;
+            background: white;
+            color: #ff0033;
+            cursor: pointer;
+          "
+        >
+          Think Again 💭
+        </button>
+      </div>
+    </div>
+
+    <!-- Wish -->
+    <div id="wishMessage">
+      Yeahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh......🕺🕺🕺 <br /><br />
+      Now pop these balloons... 🎈✨
+    </div>
+
+    <!-- Balloon Celebration -->
+    <div id="balloonScreen">
+      <h1>Pop the Love Balloons... 🎈💖</h1>
+      <div id="polaroid">
+        <img id="photo" src="" />
+        <p id="quote"></p>
+      </div>
+    </div>
+
+    <!-- Forever Screen -->
+    <div id="foreverScreen">
+      <h1>💍 Forever RaaShuuu 💖</h1>
+      <div class="finalQuote">
+        "My love… ❤️
+        This is our very first Valentine’s Day together, and honestly, it feels unreal.
+        Because before you, Valentine’s Day was just a date on the calendar…
+        But with you, it has become a feeling.
+        
+        You came into my life so softly, so beautifully,
+        and somehow you turned ordinary moments into something magical.
+        The way you smile, the way you exist, the way you care…
+        it makes my heart feel safe, loved, and home.
+        
+        This is not just about roses or gifts…
+        This is about me realizing that I never want a future
+        where you are not a part of it. 🌹
+        
+        I don’t know what tomorrow holds,
+        but I know one thing for sure—
+        I want every tomorrow to have you in it.
+        
+        Happy First Valentine, my baby… 💕
+        You are my favorite blessing, my forever person,
+        and the most beautiful chapter of my life."
+      </div>
+      <!-- <p>Rasika ❤️ + Shubham ❤️</p> -->
+      <div id="typingText"></div>
+    </div>
+
+    <script>
+      const noBtn = document.getElementById("noBtn");
+      const yesBtn = document.getElementById("yesBtn");
+
+      const proposalBox = document.getElementById("proposalBox");
+      const wishMessage = document.getElementById("wishMessage");
+      const balloonScreen = document.getElementById("balloonScreen");
+      const foreverScreen = document.getElementById("foreverScreen");
+
+      const polaroid = document.getElementById("polaroid");
+      const photo = document.getElementById("photo");
+      const quote = document.getElementById("quote");
+
+      /* 💗 Hearts Everywhere */
+      function createHeart(parent) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        const hearts = ["💗", "💕", "💖", "💘", "❤️"];
+        heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 20 + 20 + "px";
+        heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+        parent.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+      }
+
+      setInterval(() => createHeart(document.body), 200);
+      setInterval(() => {
+        if (balloonScreen.style.display === "flex") createHeart(balloonScreen);
+      }, 200);
+
+      /* 😿 Funny No Button */
+      const noReaction = document.getElementById("noReaction");
+      const catImg = document.getElementById("catImg");
+      const catText = document.getElementById("catText");
+      const thinkBtn = document.getElementById("thinkBtn");
+
+      let noClicks = 0;
+
+      noBtn.addEventListener("click", () => {
+        noReaction.style.display = "block";
+        noClicks++;
+
+        if (noClicks === 1) {
+          catImg.src = "cat1.jpg";
+          catText.innerHTML = "Whyyyy babyyyy 😿";
+        } else if (noClicks === 2) {
+          catImg.src = "cat2.jpg";
+          catText.innerHTML = "Noooo 😭 I’ll cry all dayyy!";
+        } else if (noClicks === 3) {
+          catImg.src = "cat3.JPEG";
+          catText.innerHTML = "😂😂😚😚🕺";
+
+          noBtn.innerHTML = "NO hai hi nahi !";
+          noBtn.style.background = "#ff0033";
+          noBtn.style.color = "white";
+          noBtn.style.border = "2px pink solid";
+          
+        } else {
+          yesBtn.click();
+        }
+      });
+
+      thinkBtn.addEventListener("click", () => {
+        catText.innerHTML = "Good choice 😌 Now press YES 💘";
+      });
+
+      /* Balloon Memories */
+      const memories = [
+        { img: "photo_6_2026-02-14_03-57-52.jpg", text: "Every moment with you feels magical 💖" },
+        { img: "photo_3_2026-02-14_03-57-52.jpg", text: "You are my happiest place 🌹" },
+        { img: "photo_5_2026-02-14_03-57-52.jpg", text: "Love is you and me forever ✨" },
+        { img: "photo_2_2026-02-14_03-57-52.jpg", text: "My heart beats only for you 💕" },
+        { img: "photo_1_2026-02-14_03-57-52.jpg", text: "Together is my favorite place 💘" },
+        { img: "photo_4_2026-02-14_03-57-52.jpg", text: "Our story is my favorite fairytale 💍" },
+      ];
+
+      const balloonColors = [
+        "#ff4d6d",
+        "#ff85a1",
+        "#ffb3c6",
+        "#ffdd57",
+        "#72ddf7",
+        "#9b5de5",
+        "#00f5d4",
+      ];
+      let popped = 0;
+
+      /* Confetti */
+      function confettiBurst(x, y) {
+        for (let i = 0; i < 18; i++) {
+          const confetti = document.createElement("div");
+          confetti.classList.add("confetti");
+          confetti.style.left = x + "px";
+          confetti.style.top = y + "px";
+          confetti.style.background =
+            balloonColors[Math.floor(Math.random() * balloonColors.length)];
+          balloonScreen.appendChild(confetti);
+          setTimeout(() => confetti.remove(), 1200);
+        }
+      }
+
+      /* 🎈 Balloon Movement */
+      function floatBalloon(balloon) {
+        function moveBalloon() {
+          balloon.style.transition = "left 3s ease, top 3s ease";
+          balloon.style.left = Math.random() * 80 + "vw";
+          balloon.style.top = Math.random() * 65 + "vh";
+        }
+        setTimeout(moveBalloon, 100);
+        setInterval(moveBalloon, Math.random() * 2000 + 2500);
+      }
+
+      /* Typing */
+      function startTypingLove() {
+        const text = "I Love You RaaaShuuuuu ❤️";
+        const typingDiv = document.getElementById("typingText");
+        typingDiv.innerHTML = "";
+        let i = 0;
+        const interval = setInterval(() => {
+          typingDiv.innerHTML += text.charAt(i);
+          i++;
+          if (i === text.length) clearInterval(interval);
+        }, 120);
+      }
+
+      /* YES Click */
+      yesBtn.addEventListener("click", () => {
+        proposalBox.style.display = "none";
+        wishMessage.style.display = "block";
+
+        setTimeout(() => {
+          wishMessage.style.display = "none";
+          balloonScreen.style.display = "flex";
+          createBalloons();
+        }, 2500);
+      });
+
+      /* Create Balloons */
+      function createBalloons() {
+        memories.forEach((memory) => {
+          const balloon = document.createElement("div");
+          balloon.classList.add("balloon");
+
+          const color =
+            balloonColors[Math.floor(Math.random() * balloonColors.length)];
+
+          balloon.style.background = `
+          radial-gradient(circle at 30% 30%,
+            rgba(255,255,255,0.95),
+            ${color}
+          )
+        `;
+
+          balloon.style.left = Math.random() * 80 + "vw";
+          balloon.style.top = Math.random() * 70 + "vh";
+
+          floatBalloon(balloon);
+
+          balloon.addEventListener("click", (e) => {
+            confettiBurst(e.clientX, e.clientY);
+
+            balloon.remove();
+            popped++;
+
+            polaroid.style.display = "block";
+            polaroid.classList.remove("show");
+
+            setTimeout(() => {
+              polaroid.classList.add("show");
+            }, 500);
+
+            photo.src = memory.img;
+            quote.innerText = memory.text;
+
+            if (popped === memories.length) {
+              setTimeout(() => {
+                balloonScreen.style.display = "none";
+                foreverScreen.style.display = "flex";
+                startTypingLove();
+              }, 2500);
+            }
+          });
+
+          balloonScreen.appendChild(balloon);
+        });
+      }
+    </script>
+  </body>
+</html>
